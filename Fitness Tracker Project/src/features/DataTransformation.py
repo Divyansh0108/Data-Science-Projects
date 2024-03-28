@@ -1,14 +1,3 @@
-##############################################################
-#                                                            #
-#    Mark Hoogendoorn and Burkhardt Funk (2017)              #
-#    Machine Learning for the Quantified Self                #
-#    Springer                                                #
-#    Chapter 3                                               #
-#                                                            #
-##############################################################
-
-# Updated by Dave Ebbelaar on 22-12-2022
-
 from sklearn.decomposition import PCA
 from scipy.signal import butter, lfilter, filtfilt
 import copy
@@ -26,8 +15,6 @@ class LowPassFilter:
         order=5,
         phase_shift=True,
     ):
-        # http://stackoverflow.com/questions/12093594/how-to-implement-band-pass-butterworth-filter-with-scipy-signal-butter
-        # Cutoff frequencies are expressed as the fraction of the Nyquist frequency, which is half the sampling frequency
         nyq = 0.5 * sampling_frequency
         cut = cutoff_frequency / nyq
 
@@ -38,9 +25,6 @@ class LowPassFilter:
             data_table[col + "_lowpass"] = lfilter(b, a, data_table[col])
         return data_table
 
-
-# Class for Principal Component Analysis. We can only apply this when we do not have missing values (i.e. NaN).
-# For this we have to impute these first, be aware of this.
 class PrincipalComponentAnalysis:
 
     pca = []
